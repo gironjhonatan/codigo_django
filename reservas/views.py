@@ -24,8 +24,9 @@ def reserva(request):
 def crear_usuario(request):
     formulario1 = ClienteForm(request.POST or None, request.FILES or None)
     if formulario1.is_valid():
-        formulario1.save()
-        return redirect('usuario')
+       formulario1.save()
+       return render(request, "usuario/crear_usuario.html",{"formulario1":'hola'})
+       # return redirect('usuario')
     return render(request, "usuario/crear_usuario.html",{"formulario1":formulario1})
 
 def crear_reserva(request):

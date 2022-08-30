@@ -2,15 +2,17 @@ from django import forms
 from .models import Solicitud, Cliente
 from django.contrib.auth.forms import UserCreationForm
 
-class SolicitudForm(forms.Form):
+class SolicitudForm(forms.ModelForm):
     class Meta:
         model = Solicitud
-        field = '__all__'
+        fields = '__all__'
+        exclude = []
 
-class ClienteForm(forms.Form):
+class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        field = '__all__'
+        fields = '__all__'
+        exclude = []
 
 class CustomUserCreationForm(UserCreationForm):
     pass

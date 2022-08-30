@@ -10,14 +10,14 @@
         <input 
         type="text" 
         class="form-control" 
-        name="{{ campo.nombre }}" 
+        name="{{ campo.name}}" 
         id="" 
         aria-labelledby="helpId"
         placeholder="{{ campo.label }}"
         value="{{ campo.value | default:'' }}"
         />
       
-
+        
       </div>
       <div class="col-12 help-text">{{ campo.errors }}</div>
     {% endfor %}
