@@ -1,0 +1,53 @@
+{% extends "plantilla.html" %}
+{% block titulo %} Lista de Usuarios {% endblock %}
+
+{% block contenido %} 
+
+<div class="card">
+    <div class="card-header">
+        <a name="" id="" class="btn btn-success" href="{% url 'crear_usuario' %}" role="button">Agragar nuevo usuario</a>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Usuarios</h4>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
+                    <th>Departamento</th>
+                    <th>Cuidad</th>
+                    <th>Edad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.id_cliente }}</td>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.tel }}</td>
+                    <td>{{ cliente.correo }}</td>
+                    <td>{{ cliente.departamento }}</td>
+                    <td>{{ cliente.ciudad }}</td>
+                    <td>{{ cliente.edad }}</td>
+                        <td><a name="" id="" class="btn btn-info" href="{% url 'editar_usuario' cliente.id_cliente %}" role="button">Editar</a> 
+                        | 
+                        <a name="" id="" class="btn btn-danger" href="{% url 'eliminaru' cliente.id_cliente %}" role="button">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+
+    </div>
+    <div class="card-footer text-muted">
+        
+    </div>
+</div>
+
+{% endblock %}
