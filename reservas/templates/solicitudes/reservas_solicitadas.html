@@ -11,29 +11,32 @@
         
         <table class="table">
             <thead>
+                
                 <tr>
                     <th>Nombre cliente</th>
                     <th>Identificacion</th>
                     <th>Teléfono</th>
                     <th>Ciudad</th>
                     <th>Fecha evento</th>
-                    <th>Cantidad de personas</th>
+                    <th>Cantidad personas</th>
                     <th>Motivo</th>
                 </tr>
             </thead>
             <tbody>
+                {% for cliente in clientes %}
                 <tr>
-                    <td>jhonatan</td>
-                    <td>1234567890</td>
-                    <td>0000000</td>
-                    <td>pereira<td>
-                    <td>23/08/2022</td>
-                    <td>40</td>
-                    <td>Motivo</td>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.tel }}</td>
+                    <td>{{ cliente.ciudad }}<td>
+                    <td>{{ reserva.fecha }}</td>
+                    <td>{{ reserva.no_personas }}</td>
+                    <td>{{ reserva.motivo }}</td>
                     <td> <td><a name="" id="" class="btn btn-info" href="" role="button">Editar</a> 
                         | 
                         <a name="" id="" class="btn btn-danger" href="#" role="button">Eliminar</a></td></td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
         

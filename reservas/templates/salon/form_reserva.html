@@ -7,13 +7,14 @@
       <label for="" class="form-label">{{ campo.label }}</label>
 
       <input 
-      type="text" 
+      type="{% if campo.label == 'Fecha' %}{{ 'date' }}{% else %}{{ 'text' }}{% endif %}" 
       class="form-control" 
       name="{{ campo.name }}" 
       id="" 
       aria-labelledby="helpId"
       placeholder="{{ campo.label }}"
-      value="{{ campo.value | default:'' }}"/>
+      value="{{ campo.value | default:'' }}"
+      />
       
 
     </div>

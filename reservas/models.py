@@ -9,8 +9,10 @@ class Cliente (models.Model):
     ciudad = models.CharField(max_length=30)
     edad = models.CharField(max_length=10)
     def __str__(self):
-        
-        return self.nombre
+        fila1 = "Nombre:" + self.nombre + " - " + "Tel:" + self.tel + " - " 
+        + "correo: " + self.correo + " - " + "Departamento:" + self.departamento 
+        + " - " + "Ciudad:" + self.ciudad + " - " + "Edad:" + self.edad
+        return fila1
 
 class Solicitud (models.Model):
     id_solicitud = models.AutoField(primary_key=True)
