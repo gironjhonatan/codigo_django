@@ -2,9 +2,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.inicio, name='inicio'),
+    path('', views.login, name='login_usuario'),
+    path('inicio', views.inicio, name='inicio'),
     path('usuario', views.usuario, name='usuario'),
     path('reserva', views.reserva, name='reserva'),
+    path('login', views.login, name='login'),
 
     path('crear/usuario', views.crear_usuario, name='crear_usuario'),
     path('crear/reserva', views.crear_reserva, name='crear_reserva'),
@@ -13,5 +15,5 @@ urlpatterns = [
     path('solicitud/reservas', views.reservas_solicitadas, name='reservas_solicitadas'),
     path('eliminaru/<int:id1_cliente>', views.eliminaru, name = 'eliminaru'),
     path('eliminarr/<int:id2_solicitud>', views.eliminarr, name = 'eliminarr'),
-    path('registrar/', views.registro, name= 'registrar'),
+    path('registro', views.registro, name= 'registro'),
 ]

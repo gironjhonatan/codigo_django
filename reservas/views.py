@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .models import Solicitud
 from .models import Cliente
 from .forms import ClienteForm,SolicitudForm, CustomUserCreationForm
-from django.contrib import messages
 
 from django.shortcuts import render
 from .models import *
@@ -38,12 +37,18 @@ def crear_reserva(request):
 def editar_usuario(request, id_cliente):
     cliente  = Cliente.objects.get(id_cliente = id_cliente)
     formulario1 = ClienteForm(request.POST or None, request.FILES or None, instance = cliente)
+    if formulario1.is_valid() and request.method == 'POST':
+        formulario1.save()
+        return redirect('usuario')
     return render(request, "usuario/editar_usuario.html",{'formulario1':formulario1})
 
 
 def editar_reserva(request, id_solicitud):
     reserva = Solicitud.objects.get(id_solicitud = id_solicitud)
     formulario2 = SolicitudForm(request.POST or None, request.FILES or None, instance = reserva)
+    if formulario2.is_valid() and request.method == 'POST':
+        formulario2.save()
+        return redirect('reserva')
     return render(request, "salon/editar_reserva.html",{'formulario2':formulario2})
 
 def reservas_solicitadas(request):
@@ -61,18 +66,25 @@ def eliminaru(request, id_cliente):
     usuario.delete()
     return redirect('usuario')
 
-def registro(request):
-    data= {
-        'form': CustomUserCreationForm
-    }
 
-    if request.method == 'POST':
-        formulario = CustomUserCreationForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            user = authenticate(username=formulario.cleaned_data["username"], password= formulario.cleaned_data["password1"])
-            login(request, user)
-            #messages(request, "resgistro exitoso")
-            return redirect(to="inicio")
-        data["form"] = formulario
-    return render(request, 'paginas/registro.html', data)
+
+def login(request):
+    return render(request, 'paginas/login_usuarios.html')
+
+def registro(request):
+    return render(request, 'login/registro.html')
+
+    # data= {
+    #     'form': CustomUserCreationForm
+    # }
+
+    # if request.method == 'POST':
+    #     formulario = CustomUserCreationForm(data=request.POST)
+    #     if formulario.is_valid():
+    #         formulario.save()
+    #         user = authenticate(username=formulario.cleaned_data["username"], password= formulario.cleaned_data["password1"])
+    #         login(request, user)
+    #         #messages(request, "resgistro exitoso")
+    #         return redirect(to="inicio")
+    #     data["form"] = formulario
+   

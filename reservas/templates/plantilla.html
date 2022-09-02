@@ -16,16 +16,17 @@
 
     <nav class="navbar navbar-expand navbar-light bg-light">
         <div class="nav navbar-nav">
-            <a class="nav-item nav-link active" href="{% url 'inicio' %}">Inicio</a>
             <a class="nav-item nav-link active" href="{% url 'usuario' %}">Usuarios</a>
             <a class="nav-item nav-link active" href="{% url 'reserva' %}">Reserva</a>
             <a class="nav-item nav-link active" href="{% url 'reservas_solicitadas' %}">Solicitudes</a>
+            <a class="nav-item nav-link active" href="{% url 'registro' %}" style="margin-left: 1070px;">Salir</a>
         </div>
     </nav>
 
     <div class="container">
         <div class="class row">
             <div class="class col-12">
+              <br>
                 {% block contenido %}  {% endblock %}
             </div>
         </div>

@@ -15,13 +15,21 @@
             <div class="col-12 col-md-6 offset-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <h2>ingresa tus datos</h2>
+                        <h2 style="text-align: center;">ingresa tus datos</h2>
                         <hr>
                         <form action="" method="post">
                             {% csrf_token %}
-                            {{form}}
-                            <input type="submit" value="ingersar">
+                            <div class="mb-3">
+                              <label for="" class="form-label">Name</label>
+                              <input type="text"class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+
+                              <label for="" class="form-label">Password</label>
+                              <input type="password"class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                            </div>
+                            <a href="{% url 'inicio' %}" class="btn btn-primary"> Ingresar </a>
+                            <a href="{% url 'registro' %}" class="btn btn-success"> Registrarse </a>
                         </form>
+                        <br>
                     </div>
                 </div>
             </div>
