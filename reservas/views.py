@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import Solicitud
 from .models import Cliente
-from .forms import ClienteForm,SolicitudForm, CustomUserCreationForm
+from .models import UsuariosRegistro
+from .forms import ClienteForm,SolicitudForm, UsuariosRegistroForm
 
 from django.shortcuts import render
 from .models import *
-from django.contrib.auth import authenticate, login
+
 # Create your views here.
 
 def inicio(request):
@@ -23,8 +24,7 @@ def crear_usuario(request):
     formulario1 = ClienteForm(request.POST or None, request.FILES or None)
     if formulario1.is_valid():
        formulario1.save()
-       return render(request, "usuario/crear_usuario.html",{"formulario1":'hola'})
-       # return redirect('usuario')
+       return redirect('usuario')
     return render(request, "usuario/crear_usuario.html",{"formulario1":formulario1})
 
 def crear_reserva(request):
@@ -41,7 +41,6 @@ def editar_usuario(request, id_cliente):
         formulario1.save()
         return redirect('usuario')
     return render(request, "usuario/editar_usuario.html",{'formulario1':formulario1})
-
 
 def editar_reserva(request, id_solicitud):
     reserva = Solicitud.objects.get(id_solicitud = id_solicitud)
@@ -66,13 +65,18 @@ def eliminaru(request, id_cliente):
     usuario.delete()
     return redirect('usuario')
 
-
-
 def login(request):
     return render(request, 'paginas/login_usuarios.html')
 
 def registro(request):
-    return render(request, 'login/registro.html')
+    formulario3 = UsuariosRegistroForm(request.POST or None, request.FILES or None)
+    if formulario3.is_valid():
+       formulario3.save()
+       return redirect(request, 'registro')
+    return render(request, "login/registro.html",{"formulario3":formulario3})
+
+    
+
 
     # data= {
     #     'form': CustomUserCreationForm

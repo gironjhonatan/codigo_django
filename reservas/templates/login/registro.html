@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
     <title>Document</title>
 </head>
 <body>
@@ -16,24 +15,31 @@
                 <div class="card">
                     <div class="card-body">
                         <h2 style="text-align: center;"> Tus datos</h2>
-                        <form action="" method="post">
+                        <form enctype="multipart/form-data" method="post">
+
                             {% csrf_token %}
-                            <div class="mb-3">
-                              <label for="" class="form-label">Username</label>
-                              <input type="text"class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-
-                              <label for="" class="form-label">Password1</label>
-                              <input type="password"class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-
-                              <label for="" class="form-label">Password2</label>
-                              <input type="password"class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-
-                              <label for="" class="form-label">Gmail</label>
-                              <input type="password"class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-
-                            </div>
-                            <input type="submit" class="btn btn-success">
-                            <a href="{% url 'login_usuario' %}" class="btn btn-primary"> Regresar </a>
+                        
+                            {% for campo in formulario3 %}
+                        
+                              <div class="mb-3">
+                                <label for="" class="form-label">{{ campo.label }}</label>
+                                <input 
+                                type="{% if campo.label == 'Password' %}{{ 'password' }}{% else %}{{ 'text' }}{% endif %}" 
+                                type="{% if campo.label == 'confirmPassword' %}{{ 'password' }}{% else %}{{ 'text' }}{% endif %}" 
+                                class="form-control" 
+                                name="{{ campo.name}}" 
+                                id="" 
+                                aria-labelledby="helpId"
+                                placeholder="{{ campo.label }}"
+                                value="{{ campo.value | default:'' }}"
+                                />
+                              </div>
+                              <div class="col-12 help-text">{{ campo.errors }}</div>
+                                {% endfor %}
+                        
+                            <input name="" id="" class="btn btn-success" type="submit" value="Enviar">
+                            <a name="" id="" class="btn btn-primary" href="{% url 'login' %}" role="button">Cancelar</a>
+                        
                         </form>
                         <br>
                     </div>

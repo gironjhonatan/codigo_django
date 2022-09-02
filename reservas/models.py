@@ -31,10 +31,9 @@ class UsuariosRegistro (models.Model):
     id_usuario = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=40)
     correo = models.CharField(max_length=40)
-    password1 = models.CharField(max_length=20)
-    password2 = models.CharField(max_length=20)
+    password = models.CharField(max_length=20)
 
     def __str__(self):
         fila3 = "Nombre:" + self.nombre + " - " + "Correo:" + self.correo + " - "
-        + "Pass1:" + self.password1 + " - " + "Pass2:" + self.password2
+        + "Password:" + self.password
         return fila3
