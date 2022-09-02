@@ -72,7 +72,7 @@ def registro(request):
     formulario3 = UsuariosRegistroForm(request.POST or None, request.FILES or None)
     if formulario3.is_valid():
        formulario3.save()
-       return redirect(request, 'registro')
+       #return redirect(request, 'registro')
     return render(request, "login/registro.html",{"formulario3":formulario3})
 
     
