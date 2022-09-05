@@ -78,10 +78,10 @@ def eliminaru(request, id_cliente):
 def login(request):
     if request.method == 'POST':
         try:
-            nuevo_usuario = UsuariosRegistro(correo = request.POST['correo'],password = request.POST['password'])
-            request.session['correo'] = nuevo_usuario.correo
+            logueo = UsuariosRegistro(correo = request.POST['correo'],password = request.POST['password'])
+            request.session['correo'] = logueo.correo
             return render(request, 'paginas/inicio.html')
-        except nuevo_usuario.DoesNotExist as e:
+        except logueo.DoesNotExist as e:
             messages.success(request, 'no valido')
     return render(request, 'paginas/login_usuarios.html')
 
