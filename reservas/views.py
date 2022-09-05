@@ -78,8 +78,7 @@ def eliminaru(request, id_cliente):
 def login(request):
     if request.method == 'POST':
         try:
-            nuevo_usuario = UsuariosRegistro.objects.get(correo = request.POST['correo'], password = request.POST['password'])
-            #print("nombre = ", nuevo_usuario)
+            nuevo_usuario = UsuariosRegistro(correo = request.POST['correo'],password = request.POST['password'])
             request.session['correo'] = nuevo_usuario.correo
             return render(request, 'paginas/inicio.html')
         except nuevo_usuario.DoesNotExist as e:
@@ -89,20 +88,3 @@ def login(request):
 
 
 
-    
-
-
-    # data= {
-    #     'form': CustomUserCreationForm
-    # }
-
-    # if request.method == 'POST':
-    #     formulario = CustomUserCreationForm(data=request.POST)
-    #     if formulario.is_valid():
-    #         formulario.save()
-    #         user = authenticate(username=formulario.cleaned_data["username"], password= formulario.cleaned_data["password1"])
-    #         login(request, user)
-    #         #messages(request, "resgistro exitoso")
-    #         return redirect(to="inicio")
-    #     data["form"] = formulario
-   
