@@ -1,8 +1,11 @@
+from pyexpat.errors import messages
 from django.shortcuts import render, redirect
 from .models import Solicitud
 from .models import Cliente
+from .forms import UsuariosRegistroForm
+from .forms import ClienteForm,SolicitudForm
 from .models import UsuariosRegistro
-from .forms import ClienteForm,SolicitudForm, UsuariosRegistroForm
+
 
 from django.shortcuts import render
 from .models import *
@@ -33,6 +36,13 @@ def crear_reserva(request):
         formulario2.save()
         return redirect('reserva')
     return render(request, "salon/crear_reserva.html",{"formulario2":formulario2})
+
+def registro(request):
+    formulario3 = UsuariosRegistroForm(request.POST or None, request.FILES or None)
+    if formulario3.is_valid():
+       formulario3.save()
+       return redirect('inicio')
+    return render(request, "login/registro.html",{"formulario3":formulario3})
 
 def editar_usuario(request, id_cliente):
     cliente  = Cliente.objects.get(id_cliente = id_cliente)
@@ -66,14 +76,18 @@ def eliminaru(request, id_cliente):
     return redirect('usuario')
 
 def login(request):
+    if request.method == 'POST':
+        try:
+            nuevo_usuario = UsuariosRegistro.objects.get(correo = request.POST['correo'], password = request.POST['password'])
+            #print("nombre = ", nuevo_usuario)
+            request.session['correo'] = nuevo_usuario.correo
+            return render(request, 'paginas/inicio.html')
+        except nuevo_usuario.DoesNotExist as e:
+            messages.success(request, 'no valido')
     return render(request, 'paginas/login_usuarios.html')
 
-def registro(request):
-    formulario3 = UsuariosRegistroForm(request.POST or None, request.FILES or None)
-    if formulario3.is_valid():
-       formulario3.save()
-       #return redirect(request, 'registro')
-    return render(request, "login/registro.html",{"formulario3":formulario3})
+
+
 
     
 

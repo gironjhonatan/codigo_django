@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>Document</title>
 </head>
-<body>
+<body style="background-color: #8da8da;">
     <br><br>
     <div class="container">
         <div class="row">
@@ -25,7 +25,6 @@
                                 <label for="" class="form-label">{{ campo.label }}</label>
                                 <input 
                                 type="{% if campo.label == 'Password' %}{{ 'password' }}{% else %}{{ 'text' }}{% endif %}" 
-                                type="{% if campo.label == 'confirmPassword' %}{{ 'password' }}{% else %}{{ 'text' }}{% endif %}" 
                                 class="form-control" 
                                 name="{{ campo.name}}" 
                                 id="" 
