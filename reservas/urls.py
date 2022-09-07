@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from django.contrib import admin
+from .views import vista_registro
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
@@ -17,5 +17,5 @@ urlpatterns = [
     path('solicitud/reservas', views.reservas_solicitadas, name='reservas_solicitadas'),
     path('eliminaru/<int:id_cliente>', views.eliminaru, name = 'eliminaru'),
     path('eliminarr/<int:id_solicitud>', views.eliminarr, name = 'eliminarr'),
-    path('registro', views.registro, name= 'registro'),
+    path('registro', vista_registro.as_view(), name= 'registro'),
 ]

@@ -2,10 +2,10 @@ from pyexpat.errors import messages
 from django.shortcuts import render, redirect
 from .models import Solicitud
 from .models import Cliente
-from .forms import UsuariosRegistroForm
 from .forms import ClienteForm,SolicitudForm
-from .models import UsuariosRegistro
-
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import authenticate
+from django.views.generic import View
 
 from django.shortcuts import render
 from .models import *
@@ -37,12 +37,16 @@ def crear_reserva(request):
         return redirect('reserva')
     return render(request, "salon/crear_reserva.html",{"formulario2":formulario2})
 
-def registro(request):
-    formulario3 = UsuariosRegistroForm(request.POST or None, request.FILES or None)
-    if formulario3.is_valid():
-       formulario3.save()
-       return redirect('inicio')
-    return render(request, "login/registro.html",{"formulario3":formulario3})
+class vista_registro(View):
+    def get(self, request):
+        form = UserCreationForm()
+        return render(request, "login/registro.html", {"form":form})
+
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('inicio') 
 
 def editar_usuario(request, id_cliente):
     cliente  = Cliente.objects.get(id_cliente = id_cliente)
@@ -76,14 +80,34 @@ def eliminaru(request, id_cliente):
     return redirect('usuario')
 
 def login(request):
-    if request.method == 'POST':
-        try:
-            logueo = UsuariosRegistro(correo = request.POST['correo'],password = request.POST['password'])
-            request.session['correo'] = logueo.correo
-            return render(request, 'paginas/inicio.html')
-        except logueo.DoesNotExist as e:
-            messages.success(request, 'no valido')
-    return render(request, 'paginas/login_usuarios.html')
+    if request.method == "POST":
+        formulario = AuthenticationForm(request, data = request.POST)
+        if formulario.is_valid():
+            nom = formulario.cleaned_data.get("username")
+            pas = formulario.cleaned_data.get("password")
+            usu = authenticate(username = nom, password = pas)
+            if usu is not None:
+                return redirect("inicio")
+            else:
+                 messages.error(request, "no valido") 
+    formulario = AuthenticationForm()
+    return render(request, "paginas/login_usuarios.html",{"formulario":formulario})
+
+
+
+
+    # if request.method == 'POST':
+    #     logueo = UsuariosRegistro()
+    #     if (logueo.correo == request.POST['correo'], logueo.pasword == request.POST['password']):
+    #         request.session['correo'] = logueo.correo 
+    #         return render(request, 'paginas/inicio.html')
+    # return render(request, 'paginas/login_usuarios.html')
+
+    
+   
+        
+
+    
 
 
 
