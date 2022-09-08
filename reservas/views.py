@@ -5,7 +5,7 @@ from .models import Cliente
 from .forms import ClienteForm,SolicitudForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate
-from django.views.generic import View
+
 
 from django.shortcuts import render
 from .models import *
@@ -37,16 +37,16 @@ def crear_reserva(request):
         return redirect('reserva')
     return render(request, "salon/crear_reserva.html",{"formulario2":formulario2})
 
-class vista_registro(View):
-    def get(self, request):
-        form = UserCreationForm()
-        return render(request, "login/registro.html", {"form":form})
+# class vista_registro(View):
+#     def get(self, request):
+#         form = UserCreationForm()
+#         return render(request, "login/registro.html", {"form":form})
 
-    def post(self, request):
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('inicio') 
+#     def post(self, request):
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('inicio') 
 
 def editar_usuario(request, id_cliente):
     cliente  = Cliente.objects.get(id_cliente = id_cliente)
@@ -93,7 +93,15 @@ def login(request):
     formulario = AuthenticationForm()
     return render(request, "paginas/login_usuarios.html",{"formulario":formulario})
 
-
+def registro(request):
+    if request.method == 'POST':
+        formulario = UserCreationForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('inicio')
+    else:
+        formulario = UserCreationForm()
+    return render(request, 'login/registro.html', {'formulario': formulario}) 
 
 
     # if request.method == 'POST':
