@@ -1,5 +1,5 @@
 from django import forms
-from .models import Solicitud, Cliente, UsuariosRegistro
+from .models import Solicitud, Cliente
 from django.contrib.auth.forms import UserCreationForm
 
 class SolicitudForm(forms.ModelForm):
@@ -13,6 +13,5 @@ class ClienteForm(forms.ModelForm):
         model = Cliente
         fields = '__all__'
         exclude = []
-
 class CustomUserCreationForm(UserCreationForm):
     pass

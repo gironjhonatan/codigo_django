@@ -37,17 +37,6 @@ def crear_reserva(request):
         return redirect('reserva')
     return render(request, "salon/crear_reserva.html",{"formulario2":formulario2})
 
-# class vista_registro(View):
-#     def get(self, request):
-#         form = UserCreationForm()
-#         return render(request, "login/registro.html", {"form":form})
-
-#     def post(self, request):
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('inicio') 
-
 def editar_usuario(request, id_cliente):
     cliente  = Cliente.objects.get(id_cliente = id_cliente)
     formulario1 = ClienteForm(request.POST or None, request.FILES or None, instance = cliente)
@@ -102,14 +91,6 @@ def registro(request):
     else:
         formulario = UserCreationForm()
     return render(request, 'login/registro.html', {'formulario': formulario}) 
-
-
-    # if request.method == 'POST':
-    #     logueo = UsuariosRegistro()
-    #     if (logueo.correo == request.POST['correo'], logueo.pasword == request.POST['password']):
-    #         request.session['correo'] = logueo.correo 
-    #         return render(request, 'paginas/inicio.html')
-    # return render(request, 'paginas/login_usuarios.html')
 
     
    

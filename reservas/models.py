@@ -27,3 +27,4 @@ class Solicitud (models.Model):
         + "Motivo: " + self.motivo + " - " + "observaciones:" + self.observaciones 
         + " - " + "Estado:" + self.estado
         return fila2
+
