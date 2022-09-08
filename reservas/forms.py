@@ -14,12 +14,5 @@ class ClienteForm(forms.ModelForm):
         fields = '__all__'
         exclude = []
 
-class UsuariosRegistroForm(forms.ModelForm):
-
-    class Meta:
-        model = UsuariosRegistro
-        field =  '__all__'
-        exclude = []
-
 class CustomUserCreationForm(UserCreationForm):
     pass

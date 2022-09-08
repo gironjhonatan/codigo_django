@@ -27,13 +27,3 @@ class Solicitud (models.Model):
         + "Motivo: " + self.motivo + " - " + "observaciones:" + self.observaciones 
         + " - " + "Estado:" + self.estado
         return fila2
-class UsuariosRegistro (models.Model):
-    id_usuario = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=40)
-    correo = models.CharField(max_length=40)
-    password = models.CharField(max_length=20)
-
-    def __str__(self):
-        fila3 = "Nombre:" + self.nombre + " - " + "Correo:" + self.correo + " - "
-        + "Password:" + self.password
-        return fila3
